@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paróquia São Crispim</title>
+  <style>
+    /* Paróquia São Crispim - Estilos Unificados */
+    :root {
+      --vinho: #7a1620;
+      --vinho-escuro: #4f0d14;
+      --dourado: #c9a24a;
+      --dourado-claro: #e8d49a;
+      --creme: #faf6ee;
+      --texto: #2b2b2b;
+      --branco: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Georgia", "Times New Roman", serif;
+      color: var(--texto);
+      background: var(--creme);
+      line-height: 1.7;
+    }
+
+    h1, h2, h3 { font-family: "Georgia", serif; line-height: 1.25; }
+    a { color: inherit; }
+
+    .container {
+      width: min(1100px, 92%);
+      margin: 0 auto;
+    }
+
+    /* ---------- Cabeçalho ---------- */
+    header {
+      background: var(--vinho-escuro);
+      border-bottom: 3px solid var(--dourado);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.6rem 0;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-decoration: none;
+      color: var(--branco);
+    }
+
+    .brand img { height: 50px; width: auto; }
+
+    .brand span {
+      font-size: 1.15rem;
+      font-weight: bold;
+      letter-spacing: 0.04em;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: var(--dourado-claro);
+      text-decoration: none;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding-bottom: 2px;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    nav a:hover { color: var(--branco); border-color: var(--dourado); }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      /* Foto de fundo com camada escura por cima para reduzir o brilho */
+      background:
+        linear-gradient(160deg, rgba(79, 13, 20, 0.78) 0%, rgba(45, 6, 10, 0.88) 100%),
+        url("fundo.png") center 25% / cover no-repeat;
+      background-color: var(--vinho-escuro);
+      color: var(--branco);
+      text-align: center;
+      padding: 3.5rem 0 4rem;
+    }
+
+    .hero img {
+      width: 140px;
+      max-width: 40%;
+      height: auto;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
+    }
+
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 0.6rem; }
+
+    .hero p {
+      max-width: 640px;
+      margin: 0 auto 1.8rem;
+      color: var(--dourado-claro);
+      font-size: 1.1rem;
+      font-style: italic;
+    }
+
+    .botoes { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-block;
+      padding: 0.7rem 1.5rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+      transition: transform 0.15s, background 0.2s;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+    .btn-ouro { background: var(--dourado); color: var(--vinho-escuro); }
+    .btn-borda { border: 2px solid var(--dourado); color: var(--branco); }
+    .btn-vinho { background: var(--vinho); color: var(--branco); }
+    .btn-vinho-borda { border: 2px solid var(--vinho); color: var(--vinho); }
+
+    /* ---------- Seções Comuns ---------- */
+    section { padding: 3rem 0; }
+    .titulo-secao { text-align: center; margin-bottom: 2rem; }
+    .titulo-secao h2 {
+      font-size: 2rem;
+      color: var(--vinho-escuro);
+      position: relative;
+      display: inline-block;
+      padding-bottom: 0.5rem;
+    }
+    .titulo-secao h2::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 25%;
+      width: 50%;
+      height: 2px;
+      background: var(--dourado);
+    }
+
+    /* ---------- Sobre ---------- */
+    .sobre p {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 1rem;
+      font-size: 1.05rem;
+    }
+
+    /* ---------- Horários ---------- */
+    .horarios-secao { background-color: var(--branco); }
+    .grid-horarios {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .grid-missas { grid-template-columns: repeat(2, 1fr); margin-bottom: 2.5rem; }
+    .grid-confissoes { grid-template-columns: minmax(280px, 640px); justify-content: center; }
+
+    .obs-votivas {
+      max-width: 640px;
+      margin: 0 auto 2.5rem;
+      padding: 1rem 1.3rem;
+      background: var(--creme);
+      border: 1px solid var(--dourado-claro);
+      border-left: 4px solid var(--vinho);
+      border-radius: 6px;
+      text-align: left;
+      font-size: 0.98rem;
+    }
+    .obs-votivas p { margin: 0.4rem 0; }
+
+    .sub-titulo {
+      text-align: center;
+      color: var(--vinho-escuro);
+      font-size: 1.4rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .card-horario {
+      background: var(--creme);
+      border: 1px solid var(--dourado-claro);
+      border-top: 4px solid var(--vinho);
+      border-radius: 8px;
+      padding: 1.8rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    }
+
+    .icone-horario { font-size: 2.2rem; margin-bottom: 0.5rem; }
+    .card-horario h3 { color: var(--vinho-escuro); font-size: 1.3rem; margin-bottom: 1rem; }
+
+    .lista-horarios { list-style: none; padding: 0; text-align: left; }
+    .lista-horarios li {
+      padding: 0.5rem 0;
+      border-bottom: 1px dashed var(--dourado-claro);
+      font-size: 0.95rem;
+    }
+    .lista-horarios li:last-child { border-bottom: none; }
+
+    .alerta-agendamento {
+      margin-top: 1rem;
+      padding: 0.8rem;
+      background-color: #fff3cd;
+      border: 1px solid #ffeeba;
+      border-radius: 6px;
+      color: #856404;
+      font-size: 0.88rem;
+      text-align: left;
+    }
+
+    /* ---------- Clero ---------- */
+    .clero-container {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid var(--dourado-claro);
+    }
+
+    .clero-container h3 {
+      color: var(--vinho-escuro);
+      font-size: 1.4rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .clero-grid {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .padre-card {
+      background: var(--creme);
+      border: 1px solid var(--dourado);
+      border-radius: 8px;
+      padding: 1.2rem 2rem;
+      min-width: 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .padre-card .cargo {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--vinho);
+      font-weight: bold;
+    }
+
+    .padre-card strong { font-size: 1.05rem; color: var(--texto); }
+
+    /* ---------- Atendimento (Cards) ---------- */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--branco);
+      border: 1px solid var(--dourado-claro);
+      border-radius: 8px;
+      padding: 1.8rem;
+      text-align: center;
+    }
+
+    .card .icone { font-size: 2.2rem; margin-bottom: 0.5rem; }
+    .card h3 { color: var(--vinho-escuro); margin-bottom: 0.8rem; font-size: 1.2rem; }
+    .card p { font-size: 0.95rem; }
+    .card a { color: var(--vinho); text-decoration: none; font-weight: bold; }
+
+    /* ---------- Localização ---------- */
+    .mapa {
+      margin-top: 1.5rem;
+      width: 100%;
+      height: 380px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 2px solid var(--dourado);
+    }
+
+    .mapa iframe { width: 100%; height: 100%; border: 0; }
+
+    /* ---------- Rodapé ---------- */
+    footer {
+      background: var(--vinho-escuro);
+      color: var(--dourado-claro);
+      text-align: center;
+      padding: 2.5rem 0;
+      border-top: 3px solid var(--dourado);
+      font-size: 0.9rem;
+    }
+
+    footer img { height: 50px; margin-bottom: 0.8rem; }
+    footer p { margin-bottom: 0.4rem; }
+    footer a { color: var(--dourado-claro); text-decoration: underline; }
+    footer .copy { margin-top: 1.2rem; font-size: 0.8rem; color: #ccc; }
+
+    /* ---------- Ajustes gerais para celular, tablet e computador ---------- */
+    html { -webkit-text-size-adjust: 100%; }
+    img { max-width: 100%; }
+    h1, h2, h3, p, li, a { overflow-wrap: break-word; }
+    section[id] { scroll-margin-top: 90px; }
+
+    /* Tablet e telas menores */
+    @media (max-width: 900px) {
+      .header-inner { justify-content: center; text-align: center; }
+      nav ul { justify-content: center; }
+    }
+
+    /* Celular */
+    @media (max-width: 600px) {
+      header { position: static; }
+      section[id] { scroll-margin-top: 0; }
+
+      .brand img { height: 42px; }
+      .brand span { font-size: 1rem; }
+
+      nav ul { gap: 0.4rem 0.9rem; }
+      nav a { font-size: 0.78rem; letter-spacing: 0.04em; }
+
+      .hero { padding: 2.5rem 0 3rem; }
+      .hero img { width: 110px; }
+      .hero p { font-size: 1.05rem; }
+
+      section { padding: 2.2rem 0; }
+      .titulo-secao { margin-bottom: 1.5rem; }
+      .titulo-secao h2 { font-size: 1.6rem; }
+      .sub-titulo { font-size: 1.2rem; }
+
+      .sobre p { font-size: 1rem; text-align: left; }
+
+      .botoes { flex-direction: column; align-items: center; gap: 0.7rem; }
+      .btn { width: 100%; max-width: 320px; text-align: center; }
+
+      .grid-horarios { gap: 1.2rem; }
+      .card-horario { padding: 1.3rem 1.1rem; }
+      .card { padding: 1.4rem 1.1rem; }
+
+      .padre-card { min-width: 0; width: 100%; padding: 1rem 1.2rem; }
+
+      .grid-missas,
+      .grid-confissoes { grid-template-columns: 1fr; }
+
+      footer { padding: 2rem 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cabeçalho -->
+  <header>
+    <div class="container header-inner">
+      <a class="brand" href="#inicio">
+        <img src="logo.png" alt="Brasão da Paróquia São Crispim">
+        <span>Paróquia São Crispim</span>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="#inicio">Início</a></li>
+          <li><a href="#sobre">Paróquia</a></li>
+          <li><a href="#horarios">Horários</a></li>
+          <li><a href="#atendimento">Atendimento</a></li>
+          <li><a href="#localizacao">Localização</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero / Início -->
+    <section class="hero" id="inicio">
+      <div class="container">
+        <img src="logo.png" alt="Brasão da Paróquia São Crispim">
+        <h1>Paróquia São Crispim</h1>
+        <p style="font-size:1.3rem;">“Quem ama a Deus com pureza de coração, vive feliz e morre contente”</p>
+        <div class="botoes">
+          <a class="btn btn-ouro" href="https://wa.me/5516999670220?text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20a%20Par%C3%B3quia%20S%C3%A3o%20Crispim." target="_blank" rel="noopener">Falar no WhatsApp</a>
+          <a class="btn btn-borda" href="https://www.instagram.com/paroquiasaocrispim/" target="_blank" rel="noopener">Instagram</a>
+          <a class="btn btn-borda" href="#localizacao">Como chegar</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sobre -->
+    <section class="sobre" id="sobre">
+      <div class="container">
+        <div class="titulo-secao">
+          <h2>Nossa Paróquia</h2>
+        </div>
+        <p>A Paróquia São Crispim foi instalada, canonicamente, no dia 24 de outubro de 1999, sendo desmembrada da Paróquia São Benedito, tendo Pe. Devair Araújo da Fonseca como primeiro pároco.</p>
+        <p>Territorialmente, faz divisa com a Paróquia Santa Teresinha, Paróquia Santa Edwiges, Paróquia Santa Gianna, Paróquia Nossa Senhora da Abadia e Paróquia Divino Espírito Santo de Claraval – MG.</p>
+        <p>Recebeu como patrono São Crispim, por ser intercessor dos sapateiros e operários, indicação da família Betarelo, que doou o terreno onde foi construída a igreja matriz.</p>
+      </div>
+    </section>
+
+    <!-- Horários de Missas e Confissões -->
+    <section class="horarios-secao" id="horarios">
+      <div class="container">
+        <div class="titulo-secao">
+          <h2>Missas & Confissões</h2>
+        </div>
+
+        <!-- Missas: Matriz e Capelas -->
+        <h3 class="sub-titulo">Missas na Matriz e Capelas</h3>
+        <div class="grid-horarios grid-missas">
+          <article class="card-horario">
+            <div class="icone-horario">⛪</div>
+            <h3>Matriz São Crispim</h3>
+            <ul class="lista-horarios">
+              <li><strong>Terça à Sexta-feira</strong> às 07h00</li>
+              <li><strong>Sexta-feira</strong> às 19h30</li>
+              <li><strong>Sábado</strong> às 19h00</li>
+              <li><strong>Domingo</strong> às 08h00 e 19h00</li>
+            </ul>
+          </article>
+
+          <article class="card-horario">
+            <div class="icone-horario">🕯️</div>
+            <h3>Capela Santa Cruz</h3>
+            <ul class="lista-horarios">
+              <li><strong>Terça-feira</strong> às 19h30</li>
+              <li><strong>Domingo</strong> às 08h00</li>
+            </ul>
+          </article>
+
+          <article class="card-horario">
+            <div class="icone-horario">🕯️</div>
+            <h3>Capela São Miguel</h3>
+            <ul class="lista-horarios">
+              <li><strong>Quarta-feira</strong> às 19h30</li>
+              <li><strong>Domingo</strong> às 09h30</li>
+            </ul>
+          </article>
+
+          <article class="card-horario">
+            <div class="icone-horario">🕯️</div>
+            <h3>Capela Nossa Senhora Mãe da Divina Providência</h3>
+            <ul class="lista-horarios">
+              <li><strong>Quinta-feira</strong> às 19h30</li>
+              <li><strong>Domingo</strong> às 19h00</li>
+            </ul>
+          </article>
+        </div>
+
+        <!-- Missas Votivas (apenas observação) -->
+        <h3 class="sub-titulo">Missas Votivas</h3>
+        <div class="obs-votivas">
+          <p><strong>Missa Votiva do Sagrado Coração,</strong> toda primeira sexta-feira do mês, às 19h30.</p>
+          <p><strong>Missa Votiva do Imaculado Coração de Maria,</strong> todo primeiro sábado do mês, às 09h00.</p>
+        </div>
+
+        <div class="grid-horarios grid-confissoes">
+          <!-- Card Confissões -->
+          <article class="card-horario">
+            <div class="icone-horario">✝️</div>
+            <h3>Atendimento de Confissões</h3>
+            <ul class="lista-horarios">
+              <li><strong>Terça a Sexta:</strong> 09:00 às 12:00 e 14:00 às 16:30</li>
+              <li><strong>Sábado:</strong> 09:00 às 12:00</li>
+            </ul>
+            <div class="alerta-agendamento">
+              ⚠️ <strong>Observação:</strong> Para todos os dias é necessário o <strong>agendamento prévio de horário</strong> na Secretaria Paroquial.
+            </div>
+          </article>
+        </div>
+
+        <!-- Clero -->
+        <div class="clero-container">
+          <h3>Nosso Clero</h3>
+          <div class="clero-grid">
+            <div class="padre-card">
+              <span class="cargo">Pároco</span>
+              <strong>Padre Geraldo José Urbinatti (Lalim)</strong>
+            </div>
+            <div class="padre-card">
+              <span class="cargo">Vigário Paroquial</span>
+              <strong>Padre Jaysson França Alves</strong>
+            </div>
+            <div class="padre-card">
+              <span class="cargo">Diácono</span>
+              <strong>José Luíz Afonso Neto</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Atendimento -->
+    <section class="faixa" id="atendimento">
+      <div class="container">
+        <div class="titulo-secao">
+          <h2>Atendimento</h2>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <div class="icone">🕘</div>
+            <h3>Horário de Funcionamento</h3>
+            <p><strong>Escritório Paroquial</strong></p>
+            <p>09:00 às 12:30<br>14:00 às 16:30</p>
+          </article>
+
+          <article class="card">
+            <div class="icone">📞</div>
+            <h3>Telefone</h3>
+            <p><a href="https://wa.me/5516999670220?text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20a%20Par%C3%B3quia%20S%C3%A3o%20Crispim." target="_blank" rel="noopener">(16) 99967-0220</a></p>
+            <p>Clique no número para conversar pelo WhatsApp.</p>
+          </article>
+
+          <article class="card">
+            <div class="icone">⛪</div>
+            <h3>Endereço</h3>
+            <p>Av. Theodomiro Ramos, 760<br>Jardim Ipanema<br>Franca - SP, 14409-544</p>
+          </article>
+
+          <article class="card">
+            <div class="icone">📸</div>
+            <h3>Instagram</h3>
+            <p><a href="https://www.instagram.com/paroquiasaocrispim/" target="_blank" rel="noopener">@paroquiasaocrispim</a></p>
+            <p>Siga a paróquia e acompanhe as novidades.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Localização -->
+    <section id="localizacao">
+      <div class="container">
+        <div class="titulo-secao">
+          <h2>Localização</h2>
+        </div>
+        <h3 class="sub-titulo">Matriz São Crispim</h3>
+        <p style="text-align:center; font-size:1.05rem;">
+          Av. Theodomiro Ramos, 760 - Jardim Ipanema, Franca - SP, 14409-544
+        </p>
+        <div class="botoes" style="margin-top:1.5rem;">
+          <a class="btn btn-vinho" href="https://www.google.com/maps/dir/?api=1&destination=Av.+Theodomiro Ramos,+760+-+Jardim+Ipanema,+Franca+-+SP,+14409-544" target="_blank" rel="noopener">Traçar rota até a Paróquia</a>
+          <a class="btn btn-vinho-borda" href="https://www.google.com/maps/search/?api=1&query=Av.+Theodomiro+Ramos,+760+-+Jardim+Ipanema,+Franca+-+SP,+14409-544" target="_blank" rel="noopener">Abrir no Google Maps</a>
+        </div>
+
+        <!-- Localização das Capelas -->
+        <h3 class="sub-titulo" style="margin-top:3rem;">Nossas Capelas</h3>
+        <div class="cards">
+          <article class="card">
+            <div class="icone">📍</div>
+            <h3>Capela Santa Cruz</h3>
+            <p>Av. Monteiro Lobato, n.º 800</p>
+            <p><a href="https://www.google.com/maps/search/?api=1&query=Av.+Monteiro+Lobato,+800,+Franca+-+SP" target="_blank" rel="noopener">Ver no mapa</a></p>
+          </article>
+
+          <article class="card">
+            <div class="icone">📍</div>
+            <h3>Capela São Miguel</h3>
+            <p>Rua José Mafas, n.º 991</p>
+            <p><a href="https://www.google.com/maps/search/?api=1&query=Rua+Jos%C3%A9+Mafas,+991,+Franca+-+SP" target="_blank" rel="noopener">Ver no mapa</a></p>
+          </article>
+
+          <article class="card">
+            <div class="icone">📍</div>
+            <h3>Capela Nossa Senhora Mãe da Divina Providência</h3>
+            <p>Rua Wanderlei Riscolino da Silva, n.º 1220</p>
+            <p><a href="https://www.google.com/maps/search/?api=1&query=Rua+Wanderlei+Riscolino+da+Silva,+1220,+Franca+-+SP" target="_blank" rel="noopener">Ver no mapa</a></p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Rodapé -->
+  <footer>
+    <div class="container">
+      <img src="logo.png" alt="Brasão da Paróquia São Crispim">
+      <p><strong>Paróquia São Crispim</strong></p>
+      <p>Av. Theodomiro Ramos, 760 - Jardim Ipanema, Franca - SP, 14409-544</p>
+      <p>Telefone: <a href="https://wa.me/5516999670220?text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20a%20Par%C3%B3quia%20S%C3%A3o%20Crispim." target="_blank" rel="noopener">(16) 99967-0220</a></p>
+      <p>Escritório Paroquial: 09:00 às 12:30 e 14:00 às 16:30</p>
+      <p>Instagram: <a href="https://www.instagram.com/paroquiasaocrispim/" target="_blank" rel="noopener">@paroquiasaocrispim</a></p>
+      <p class="copy">&copy; 2026 Paróquia São Crispim. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
